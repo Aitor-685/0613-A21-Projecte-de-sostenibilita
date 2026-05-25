@@ -1,1 +1,2 @@
 # 0613-A21-Projecte-de-sostenibilita
+-- la pagina funcionara en el index mostrara una capcelera para cada producto, cona lgunos detalles del producto , tambien habra diferetes filtros, pero para tener mas privilegios tendra la opcion de iniciar seccion con esto podra ver la pagina con todos los detalles del producto, con las posibiladdes de gestionar los productos, pero no solo eso si que tambien sus categorias y usuaris m
