@@ -9,7 +9,7 @@ include("includes/menu.php");
     <div class="hero-text">
         <h1>Comunitats Sostenibles</h1>
         <p>Construïm junts un futur més verd, just i habitable per a tothom</p>
-        <a href="/view/productes.php" class="btn-hero">Descobreix els productes</a>
+        <a href="view/products.php" class="btn-hero">Descobreix els productes</a>
     </div>
 </section>
 
