@@ -55,4 +55,6 @@ include("../includes/menu.php");
 
 </div>
 
-<?php include("includes/foot.html"); ?>
+<script src="/js/filtres.js"></script>
+
+<?php include("../includes/foot.html"); ?>
