@@ -7,7 +7,7 @@
     <div class="links">
         <a href="/index.php">Inici</a>
         <a href="/view/sostenibilidad.php">Sostenibilitat</a>
-        <a href="/view/veureProductesCategoria.php?categoria=totes">Productes</a>
+        <a href="/view/products.php?categoria=totes">Productes</a>
         <?php if (isset($usuari) && $usuari): ?>
             <a href="/view/gestionarProducts.php">Gestionar productes</a>
             <a href="/view/gestionarCategories.php">Gestionar categories</a>

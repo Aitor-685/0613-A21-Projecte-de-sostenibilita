@@ -15,8 +15,8 @@ if (!$tipus) {
 }
 
 $rutes = [
-    'productes'      => __DIR__ . '/../view/productes.php',
-    'sostenibilitat' => __DIR__ . '/../view/sostenibilitat.php',
+    'productes'      => __DIR__ . '/productes.php',
+    'sostenibilitat' => __DIR__ . '/datos.php',
 ];
 
 if (!array_key_exists($tipus, $rutes)) {
