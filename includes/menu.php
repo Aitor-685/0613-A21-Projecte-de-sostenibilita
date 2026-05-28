@@ -12,7 +12,7 @@
             <a href="/view/gestionarProducts.php">Gestionar productes</a>
             <a href="/view/gestionarCategories.php">Gestionar categories</a>
             <a href="/view/gestionarUsuaris.php">Gestionar usuaris</a>
-            <span class="usuari-nom">👤 <?= htmlspecialchars($usuari["nom"]) ?></span>
+            <span class="usuari-nom"><?= htmlspecialchars($usuari["nom"]) ?></span>
             <a href="/controller/logout.php">Logout</a>
         <?php else: ?>
             <a href="/view/login.php" class="btn-login">🔑 Login</a>

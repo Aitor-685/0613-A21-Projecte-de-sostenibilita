@@ -20,9 +20,9 @@ include("../includes/menu.php");
             <div class="missatge-error">
                 <?php
                     $errors = [
-                        'buits'       => 'Si us plau, omple tots els camps.',
+                        'buits' => 'Si us plau, omple tots els camps.',
                         'incorrectes' => 'Usuari o contrasenya incorrectes.',
-                        'connexio'    => 'Error de connexió. Torna-ho a intentar.',
+                        'connexio'=> 'Error de connexió. Torna-ho a intentar.',
                     ];
                     echo $errors[$_GET['error']] ?? 'Error desconegut.';
                 ?>

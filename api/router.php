@@ -16,8 +16,9 @@ if (!$tipus) {
 
 $rutes = [
     'productes'      => __DIR__ . '/productes.php',
-    'sostenibilitat' => __DIR__ . '/datos.php',
+    'sostenibilitat' => __DIR__ . '/sostenibilitat.php',
 ];
+// 'router.php' delega les crides API a productes.php o sostenibilitat.php segons el paràmetre tipus.
 
 if (!array_key_exists($tipus, $rutes)) {
     http_response_code(404);
@@ -25,10 +26,4 @@ if (!array_key_exists($tipus, $rutes)) {
     exit;
 }
 
-if ($tipus === 'sostenibilitat' && isset($_GET['grafic'])) {
-    require __DIR__ . '/datos.php';
-    exit;
-}
-
-// Passar els paràmetres restants al fitxer corresponent
 require $rutes[$tipus];

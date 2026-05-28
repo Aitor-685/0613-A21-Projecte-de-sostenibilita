@@ -1,15 +1,15 @@
 <?php
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
-require_once __DIR__ . '/../controller/db.php';
+require_once __DIR__ . '/../controller/connecio.php';
 
 try {
     $pdo = getDB();
 
-    // ?categories=all → retorna totes les categories
+    // ?categories=all → retorna totes les categories amb id i nom
     if (isset($_GET['categories'])) {
-        $stmt = $pdo->query('SELECT nom FROM categories ORDER BY nom');
-        echo json_encode($stmt->fetchAll(PDO::FETCH_COLUMN));
+        $stmt = $pdo->query('SELECT id, nom FROM categories ORDER BY nom');
+        echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
         exit;
     }
 
@@ -25,17 +25,17 @@ try {
     $params = [];
 
     if (!empty($_GET['categoria']) && $_GET['categoria'] !== 'totes') {
-        $sql     .= ' AND c.nom = ?';
+        $sql .= ' AND c.nom = ?';
         $params[] = $_GET['categoria'];
     }
 
     if (!empty($_GET['preu_max'])) {
-        $sql     .= ' AND p.preu <= ?';
+        $sql .= ' AND p.preu <= ?';
         $params[] = (float) $_GET['preu_max'];
     }
 
     if (!empty($_GET['valoracio_min'])) {
-        $sql     .= ' AND p.valoracio >= ?';
+        $sql .= ' AND p.valoracio >= ?';
         $params[] = (float) $_GET['valoracio_min'];
     }
 
@@ -47,13 +47,14 @@ try {
 
     // Adaptem el format per compatibilitat amb el JS existent
     $result = array_map(fn($p) => [
-        'id'       => $p['id'],
-        'title'    => $p['nom'],
-        'price'    => $p['preu'],
+        'id' => $p['id'],
+        'title' => $p['nom'],
+        'price' => $p['preu'],
         'description' => $p['descripcio'],
-        'image'    => $p['imatge'],
+        'image' => $p['imatge'],
         'category' => $p['category'],
-        'rating'   => [
+        'category_id' => $p['categoria_id'],
+        'rating' => [
             'rate'  => $p['valoracio'],
             'count' => $p['num_valoracions']
         ]

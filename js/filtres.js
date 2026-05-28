@@ -1,8 +1,7 @@
 let totsElsProductes = [];
 let valoracioMinima = 0;
 
-// Carregar productes
-fetch('api/productes.php')
+fetch('/api/productes.php')
     .then(r => r.json())
     .then(productes => {
         totsElsProductes = productes;
@@ -11,6 +10,23 @@ fetch('api/productes.php')
     })
     .catch(() => {
         document.getElementById('llistaProductes').innerHTML = '<p>Error en carregar els productes.</p>';
+    });
+
+// Carregar categories als selects del formulari
+fetch('/api/productes.php?categories=all')
+    .then(r => r.json())
+    .then(categories => {
+        categoriesData = categories;
+        ['selectCategoriaCrear', 'editCategoriaId'].forEach(id => {
+            const sel = document.getElementById(id);
+            if (!sel) return;
+            categories.forEach(cat => {
+                const opt = document.createElement('option');
+                opt.value = cat.id;
+                opt.textContent = cat.nom;
+                sel.appendChild(opt);
+            });
+        });
     });
 
 function carregarCategories(productes) {
@@ -47,6 +63,62 @@ function renderProductes(productes) {
                 <p class="rating">${estrelles} <small>(${p.rating?.count ?? 0} valoracions)</small></p>
             </div>
         `;
+
+        if (esAdmin) {
+            const adminDiv = document.createElement('div');
+            adminDiv.className = 'admin-accions';
+
+            const editarBtn = document.createElement('button');
+            editarBtn.type = 'button';
+            editarBtn.className = 'btn-editar';
+            editarBtn.textContent = '✏️ Editar';
+            editarBtn.addEventListener('click', () => {
+                abrirFormEditar(
+                    p.id,
+                    p.title,
+                    p.price,
+                    p.category,
+                    p.rating?.rate ?? 0,
+                    p.description ?? '',
+                    p.image ?? '',
+                    p.category_id
+                );
+            });
+
+            const eliminarForm = document.createElement('form');
+            eliminarForm.action = '/controller/productes/router.php';
+            eliminarForm.method = 'POST';
+            eliminarForm.style.display = 'inline';
+            eliminarForm.addEventListener('submit', event => {
+                if (!confirm('Segur que vols eliminar aquest producte?')) {
+                    event.preventDefault();
+                }
+            });
+
+            const accionInput = document.createElement('input');
+            accionInput.type = 'hidden';
+            accionInput.name = 'accio';
+            accionInput.value = 'eliminar';
+
+            const idInput = document.createElement('input');
+            idInput.type = 'hidden';
+            idInput.name = 'id';
+            idInput.value = p.id;
+
+            const eliminarBtn = document.createElement('button');
+            eliminarBtn.type = 'submit';
+            eliminarBtn.className = 'btn-eliminar';
+            eliminarBtn.textContent = '🗑️ Eliminar';
+
+            eliminarForm.appendChild(accionInput);
+            eliminarForm.appendChild(idInput);
+            eliminarForm.appendChild(eliminarBtn);
+
+            adminDiv.appendChild(editarBtn);
+            adminDiv.appendChild(eliminarForm);
+            div.querySelector('.producte-mini-info').appendChild(adminDiv);
+        }
+
         llista.appendChild(div);
     });
 }
@@ -59,25 +131,20 @@ function generarEstrelles(rate) {
 function aplicarFiltres() {
     const categoria = document.getElementById('filtreCategoria').value;
     const preuMax = parseFloat(document.getElementById('filtrePreu').value);
-
     const filtrats = totsElsProductes.filter(p => {
         const okCategoria = categoria === 'totes' || p.category === categoria;
         const okPreu = parseFloat(p.price) <= preuMax;
         const okValoracio = (p.rating?.rate ?? 0) >= valoracioMinima;
         return okCategoria && okPreu && okValoracio;
     });
-
     renderProductes(filtrats);
 }
 
-// Events
 document.getElementById('filtreCategoria').addEventListener('change', aplicarFiltres);
-
 document.getElementById('filtrePreu').addEventListener('input', function () {
     document.getElementById('valorPreu').textContent = this.value;
     aplicarFiltres();
 });
-
 document.querySelectorAll('.btn-estrella').forEach(btn => {
     btn.addEventListener('click', function () {
         document.querySelectorAll('.btn-estrella').forEach(b => b.classList.remove('actiu'));
@@ -86,7 +153,6 @@ document.querySelectorAll('.btn-estrella').forEach(btn => {
         aplicarFiltres();
     });
 });
-
 document.getElementById('btnReset').addEventListener('click', () => {
     document.getElementById('filtreCategoria').value = 'totes';
     document.getElementById('filtrePreu').value = 1000;
@@ -95,3 +161,41 @@ document.getElementById('btnReset').addEventListener('click', () => {
     document.querySelectorAll('.btn-estrella').forEach(b => b.classList.remove('actiu'));
     renderProductes(totsElsProductes);
 });
+
+// ── Funcions Admin ───────────────────────────────────────────────
+function obrirFormCrear() {
+    document.getElementById('formCrear').style.display = 'block';
+    document.getElementById('formCrear').scrollIntoView({ behavior: 'smooth' });
+}
+
+function tancarFormCrear() {
+    document.getElementById('formCrear').style.display = 'none';
+}
+
+function obrirFormEditar(id, nom, preu, categoria, valoracio, descripcio, imatge, categoriaId) {
+    document.getElementById('editId').value        = id;
+    document.getElementById('editNom').value       = nom;
+    document.getElementById('editPreu').value      = preu;
+    document.getElementById('editValoracio').value = valoracio;
+    document.getElementById('editDescripcio').value = descripcio;
+    document.getElementById('editImatge').value    = imatge;
+
+    const sel = document.getElementById('editCategoriaId');
+    if (categoriaId) {
+        sel.value = categoriaId;
+    } else {
+        for (let opt of sel.options) {
+            if (opt.textContent === categoria) {
+                opt.selected = true;
+                break;
+            }
+        }
+    }
+
+    document.getElementById('formEditar').style.display = 'block';
+    document.getElementById('formEditar').scrollIntoView({ behavior: 'smooth' });
+}
+
+function tancarFormEditar() {
+    document.getElementById('formEditar').style.display = 'none';
+}

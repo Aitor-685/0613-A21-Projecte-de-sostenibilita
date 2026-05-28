@@ -53,7 +53,7 @@ include("includes/menu.php");
 <!-- ODS 11 -->
 <section class="seccio">
     <div class="container">
-        <h2>🎯 ODS 11 · Ciutats i Comunitats Sostenibles</h2>
+        <h2>ODS 11 · Ciutats i Comunitats Sostenibles</h2>
         <p>
             L'Objectiu de Desenvolupament Sostenible número 11 de l'ONU proposa aconseguir que 
             les ciutats i els assentaments humans siguin <strong>inclusius, segurs, resilients i sostenibles</strong> 

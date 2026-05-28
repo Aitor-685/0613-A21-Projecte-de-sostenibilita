@@ -1,4 +1,6 @@
 <?php
+// Conexió reutilitzable a la base de dades SQLite del projecte.
+// El fitxer està a data_base/ciutats.db segons l'estructura del repositori.
 function getDB(): PDO
 {
     static $pdo = null;
@@ -7,7 +9,7 @@ function getDB(): PDO
         return $pdo;
     }
 
-    $dbFile = __DIR__ . '/../data_base/ecocity.db';
+    $dbFile = __DIR__ . '/../data_base/ciutats.db';
 
     if (!file_exists($dbFile)) {
         throw new RuntimeException("Database file not found: $dbFile");

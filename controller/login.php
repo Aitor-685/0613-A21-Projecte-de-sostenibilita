@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-$usuari      = trim($_POST['usuari'] ?? '');
+$usuari = trim($_POST['usuari'] ?? '');
 $contrasenya = trim($_POST['contrasenya'] ?? '');
 
 if (!$usuari || !$contrasenya) {
@@ -28,11 +28,11 @@ try {
             'nom' => $user['nom'],
             'rol' => $user['rol']
         ];
-        header('Location: /view/productes.php');
+        header('Location: ../view/products.php');
     } else {
-        header('Location: /view/login.php?error=incorrectes');
+        header('Location: login.php?error=incorrectes');
     }
 } catch (Exception $e) {
-    header('Location: /view/login.php?error=connexio');
+    header('Location: login.php?error=connexio');
 }
 exit;
