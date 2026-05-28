@@ -1,5 +1,6 @@
 <?php
-$usuari = null;
+session_start();
+$usuari = $_SESSION['usuari'] ?? null;
 include("../includes/head.html");
 include("../includes/menu.php");
 ?>

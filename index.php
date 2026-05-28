@@ -1,5 +1,6 @@
 <?php
-$usuari = null;
+session_start();
+$usuari = $_SESSION['usuari'] ?? null;
 include("includes/head.html");
 include("includes/menu.php");
 ?>
@@ -66,15 +67,6 @@ include("includes/menu.php");
             <li>✅ Protecció del patrimoni cultural i natural</li>
             <li>✅ Reducció de l'impacte ambiental de les ciutats</li>
         </ul>
-    </div>
-</section>
-
-<!-- CTA -->
-<section class="seccio cta">
-    <div class="container text-center">
-        <h2>Explora els nostres productes sostenibles</h2>
-        <p>Tots els productes d'aquesta plataforma estan relacionats amb la sostenibilitat urbana i el benestar col·lectiu.</p>
-        <a href="/view/products.php" class="btn-hero">Veure productes</a>
     </div>
 </section>
 
