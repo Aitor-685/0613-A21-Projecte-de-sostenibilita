@@ -156,7 +156,7 @@ include("../includes/menu.php");
     <div class="container text-center">
         <h2>Forma part del canvi</h2>
         <p>Explora els nostres productes sostenibles i contribueix a l'ODS 11</p>
-        <a href="/view/productes.php" class="btn-hero">Veure productes</a>
+        <a href="/view/products.php" class="btn-hero">Veure productes</a>
     </div>
 </section>
 

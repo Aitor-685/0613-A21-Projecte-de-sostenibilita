@@ -9,9 +9,6 @@
         <a href="/view/sostenibilidad.php">Sostenibilitat</a>
         <a href="/view/products.php?categoria=totes">Productes</a>
         <?php if (isset($usuari) && $usuari): ?>
-            <a href="/view/gestionarProducts.php">Gestionar productes</a>
-            <a href="/view/gestionarCategories.php">Gestionar categories</a>
-            <a href="/view/gestionarUsuaris.php">Gestionar usuaris</a>
             <span class="usuari-nom"><?= htmlspecialchars($usuari["nom"]) ?></span>
             <a href="/controller/logout.php">Logout</a>
         <?php else: ?>

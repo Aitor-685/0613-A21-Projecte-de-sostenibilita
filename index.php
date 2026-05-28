@@ -74,7 +74,7 @@ include("includes/menu.php");
     <div class="container text-center">
         <h2>Explora els nostres productes sostenibles</h2>
         <p>Tots els productes d'aquesta plataforma estan relacionats amb la sostenibilitat urbana i el benestar col·lectiu.</p>
-        <a href="/view/productes.php" class="btn-hero">Veure productes</a>
+        <a href="/view/products.php" class="btn-hero">Veure productes</a>
     </div>
 </section>
 

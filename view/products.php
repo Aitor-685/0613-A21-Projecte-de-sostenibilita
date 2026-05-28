@@ -82,46 +82,7 @@ include("../includes/menu.php");
     </form>
 </div>
 
-<!-- FORMULARI EDITAR (només admin) -->
-<div class="container" id="formEditar" style="display:none;">
-    <h3>✏️ Editar Producte</h3>
-    <form action="/controller/productes/router.php" method="POST" class="form-gestio">
-        <input type="hidden" name="accio" value="editar">
-        <input type="hidden" name="id" id="editId">
-        <div class="form-grid">
-            <div class="camp">
-                <label>Nom *</label>
-                <input type="text" name="nom" id="editNom" required>
-            </div>
-            <div class="camp">
-                <label>Preu (€) *</label>
-                <input type="number" name="preu" id="editPreu" step="0.01" min="0" required>
-            </div>
-            <div class="camp">
-                <label>Categoria *</label>
-                <select name="categoria_id" id="editCategoriaId" required>
-                    <option value="">Selecciona...</option>
-                </select>
-            </div>
-            <div class="camp">
-                <label>Valoració (0-5)</label>
-                <input type="number" name="valoracio" id="editValoracio" step="0.1" min="0" max="5">
-            </div>
-            <div class="camp camp-ample">
-                <label>Descripció</label>
-                <textarea name="descripcio" id="editDescripcio" rows="3"></textarea>
-            </div>
-            <div class="camp camp-ample">
-                <label>URL Imatge</label>
-                <input type="text" name="imatge" id="editImatge" placeholder="https://...">
-            </div>
-        </div>
-        <div class="form-accions">
-            <button type="submit" class="btn-editar">Guardar canvis</button>
-            <button type="button" class="btn-eliminar" onclick="tancarFormEditar()">✖ Cancel·lar</button>
-        </div>
-    </form>
-</div>
+
 <?php endif; ?>
 
 <div class="container-productes">

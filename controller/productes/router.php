@@ -23,6 +23,6 @@ switch ($accio) {
         break;
     default:
         http_response_code(400);
-        header('Location: /view/productes.php?error=accio_invalida');
+        header('Location: /view/products.php?error=accio_invalida');
         exit;
 }

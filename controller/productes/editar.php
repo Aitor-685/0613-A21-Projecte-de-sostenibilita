@@ -8,7 +8,7 @@ $valoracio   = (float) ($_POST['valoracio'] ?? 0);
 $categoria_id = (int) ($_POST['categoria_id'] ?? 0);
 
 if (!$id || !$nom || !$preu || !$categoria_id) {
-    header('Location: /view/productes.php?error=camps_buits');
+    header('Location: /view/products.php?error=camps_buits');
     exit;
 }
 
@@ -20,8 +20,8 @@ try {
         WHERE id = ?
     ');
     $stmt->execute([$nom, $descripcio, $preu, $imatge, $valoracio, $categoria_id, $id]);
-    header('Location: /view/productes.php?ok=editat');
+    header('Location: /view/products.php?ok=editat');
 } catch (Exception $e) {
-    header('Location: /view/productes.php?error=error_bd');
+    header('Location: /view/products.php?error=error_bd');
 }
 exit;

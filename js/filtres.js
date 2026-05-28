@@ -73,16 +73,7 @@ function renderProductes(productes) {
             editarBtn.className = 'btn-editar';
             editarBtn.textContent = '✏️ Editar';
             editarBtn.addEventListener('click', () => {
-                abrirFormEditar(
-                    p.id,
-                    p.title,
-                    p.price,
-                    p.category,
-                    p.rating?.rate ?? 0,
-                    p.description ?? '',
-                    p.image ?? '',
-                    p.category_id
-                );
+                window.location.href = `/view/editarProducts.php?id=${encodeURIComponent(p.id)}`;
             });
 
             const eliminarForm = document.createElement('form');
@@ -170,32 +161,4 @@ function obrirFormCrear() {
 
 function tancarFormCrear() {
     document.getElementById('formCrear').style.display = 'none';
-}
-
-function obrirFormEditar(id, nom, preu, categoria, valoracio, descripcio, imatge, categoriaId) {
-    document.getElementById('editId').value        = id;
-    document.getElementById('editNom').value       = nom;
-    document.getElementById('editPreu').value      = preu;
-    document.getElementById('editValoracio').value = valoracio;
-    document.getElementById('editDescripcio').value = descripcio;
-    document.getElementById('editImatge').value    = imatge;
-
-    const sel = document.getElementById('editCategoriaId');
-    if (categoriaId) {
-        sel.value = categoriaId;
-    } else {
-        for (let opt of sel.options) {
-            if (opt.textContent === categoria) {
-                opt.selected = true;
-                break;
-            }
-        }
-    }
-
-    document.getElementById('formEditar').style.display = 'block';
-    document.getElementById('formEditar').scrollIntoView({ behavior: 'smooth' });
-}
-
-function tancarFormEditar() {
-    document.getElementById('formEditar').style.display = 'none';
 }
